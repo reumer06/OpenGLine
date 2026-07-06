@@ -15,7 +15,13 @@ void process_input(GLFWwindow *window);
 
 int main()
 {
-    glfwInit();
+    int lineNum, dashLength, flag;
+    std::vector<float> vertices;
+
+    if (!glfwInit()) {
+        std::println("Failed to initialize GLFW");
+        return -1;
+    };
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
