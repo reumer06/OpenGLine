@@ -44,10 +44,13 @@ int main()
         return -1;
     }
 
+    glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glPointSize(1.0f); // set diameter of point
+
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glfwSwapBuffers(window);
