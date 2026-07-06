@@ -13,11 +13,14 @@ void framebuffer_size_callback(GLFWwindow *window, GLint width, GLint height);
 
 void process_input(GLFWwindow *window);
 
+void glfwErrorCallback(int error, const char *description);
+
 int main()
 {
     int lineNum, dashLength, flag;
     std::vector<float> vertices;
 
+    glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
         std::println("Failed to initialize GLFW");
         return -1;
@@ -66,3 +69,7 @@ void process_input(GLFWwindow *window)
     }
 }
 
+void glfwErrorCallback(int error, const char *description)
+{
+    std::println("GLFW Error: {} \n Description: {}", error, description);
+}
