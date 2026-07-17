@@ -5,6 +5,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
+#include <fstream>
 
 const unsigned int SCR_WIDTH{800};
 const unsigned int SCR_HEIGHT{800};
@@ -14,6 +16,8 @@ void framebuffer_size_callback(GLFWwindow *window, GLint width, GLint height);
 void process_input(GLFWwindow *window);
 
 void glfwErrorCallback(int error, const char *description);
+
+std::string readFile(const char *path);
 
 int main()
 {
@@ -48,6 +52,13 @@ int main()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glPointSize(1.0f); // set diameter of point
 
+    GLint success;
+    char infoLog[512];
+
+    // Vertex Shader
+    GLuint vertexShader{glCreateShader(GL_VERTEX_SHADER)};
+    // glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
 
@@ -75,4 +86,19 @@ void process_input(GLFWwindow *window)
 void glfwErrorCallback(int error, const char *description)
 {
     std::println("GLFW Error: {} \n Description: {}", error, description);
+}
+
+
+std::string readFile(const char *path)
+{
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        std::println("Error opening file");
+    }
+
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+
+    std::string content{buffer.str()};
+    return content;
 }
