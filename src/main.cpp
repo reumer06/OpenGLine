@@ -89,6 +89,9 @@ int main()
         std::println("PROGRAM LINKING FAILED: {}", infoLog);
     }
 
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
 
