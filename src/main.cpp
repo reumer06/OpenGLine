@@ -57,7 +57,14 @@ int main()
 
     // Vertex Shader
     GLuint vertexShader{glCreateShader(GL_VERTEX_SHADER)};
-    // glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+    std::string vertexShaderSourceStr{readFile("shaders/vertexshader.vert")};
+    const char *vertexShaderSource{vertexShaderSourceStr.c_str()};
+    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+    glCompileShader(vertexShader);
+    if (!success) {
+        glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
+        std::println("Vertex Shader Compilation failed: {}", infoLog);
+    }
 
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
