@@ -80,6 +80,15 @@ int main()
         std::println("FRAGMENT SHADER COMPILATION FAILED: {}", infoLog);
     }
 
+    GLuint shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+    glGetProgramiv(shaderProgram,GL_LINK_STATUS, &success);
+    if (!success) {
+        std::println("PROGRAM LINKING FAILED: {}", infoLog);
+    }
+
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
 
