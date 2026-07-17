@@ -8,6 +8,8 @@
 #include <sstream>
 #include <fstream>
 
+#include "../../../../../msys64/mingw64/include/windows.h"
+
 const unsigned int SCR_WIDTH{800};
 const unsigned int SCR_HEIGHT{800};
 
@@ -61,6 +63,7 @@ int main()
     const char *vertexShaderSource{vertexShaderSourceStr.c_str()};
     glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
     glCompileShader(vertexShader);
+    glGetShaderiv(vertexShader,GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
         std::println("VERTEX SHADER COMPILATION FAILED: {}", infoLog);
@@ -71,6 +74,7 @@ int main()
     const char *fragmentShaderSource{fragmentShaderSourceStr.c_str()};
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
     glCompileShader(fragmentShader);
+    glGetShaderiv(fragmentShader,GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
         std::println("FRAGMENT SHADER COMPILATION FAILED: {}", infoLog);
