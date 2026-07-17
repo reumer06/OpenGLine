@@ -63,7 +63,17 @@ int main()
     glCompileShader(vertexShader);
     if (!success) {
         glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
-        std::println("Vertex Shader Compilation failed: {}", infoLog);
+        std::println("VERTEX SHADER COMPILATION FAILED: {}", infoLog);
+    }
+
+    GLuint fragmentShader(glCreateShader(GL_FRAGMENT_SHADER));
+    std::string fragmentShaderSourceStr{readFile("shaders/fragment.frag")};
+    const char *fragmentShaderSource{fragmentShaderSourceStr.c_str()};
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
+    glCompileShader(fragmentShader);
+    if (!success) {
+        glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
+        std::println("FRAGMENT SHADER COMPILATION FAILED: {}", infoLog);
     }
 
     while (!glfwWindowShouldClose(window)) {
