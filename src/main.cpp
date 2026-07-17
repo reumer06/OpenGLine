@@ -2,13 +2,9 @@
 #include <GLFW/glfw3.h>
 #include <print>
 #include <vector>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
 #include <sstream>
 #include <fstream>
 
-#include "../../../../../msys64/mingw64/include/windows.h"
 
 const unsigned int SCR_WIDTH{800};
 const unsigned int SCR_HEIGHT{800};
