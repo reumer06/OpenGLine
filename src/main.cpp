@@ -97,6 +97,8 @@ int main()
     glVertexAttribPointer(0, 2,GL_FLOAT,GL_FALSE, 2 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
 
+    vertices.clear();
+
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
 
@@ -105,6 +107,10 @@ int main()
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
     glfwTerminate();
     return 0;
 }
