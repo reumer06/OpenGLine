@@ -88,6 +88,15 @@ int main()
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
+    GLuint VAO, VBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glVertexAttribPointer(0, 2,GL_FLOAT,GL_FALSE, 2 * sizeof(float), (void *) 0);
+    glEnableVertexAttribArray(0);
+
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
 
