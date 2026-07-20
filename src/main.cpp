@@ -66,7 +66,7 @@ int main()
     }
 
     GLuint fragmentShader(glCreateShader(GL_FRAGMENT_SHADER));
-    std::string fragmentShaderSourceStr{readFile("shaders/fragment.frag")};
+    std::string fragmentShaderSourceStr{readFile("shaders/fragmentshader.frag")};
     const char *fragmentShaderSource{fragmentShaderSourceStr.c_str()};
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
     glCompileShader(fragmentShader);
