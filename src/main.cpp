@@ -181,5 +181,36 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
     int dy = abs(yEnd - yStart);
     int x, y;
     float m, xInc, yInc;
+
+    if (dashLength == 0) {
+        // Solid Line
+        if (dx >= dy) {
+            if (xStart <= xEnd) {
+                // if line is moving from the left to right
+                x = xStart;
+                y = yStart;
+            } else {
+                // swap the points of right to left
+                x = xEnd;
+                y = yEnd;
+                xEnd = xStart;
+                yEnd = yStart;
+            }
+            m = (float) dy / (float) dx;
+            for (int i = 0; i <= dx; ++i) {
+                xInc = x + i;
+                yInc = (y > yEnd)
+                           ? (
+                               -m * i + y
+                           )
+                           : (m * i + y);
+                vertices.push_back(xInc);
+                vertices.push_back((float) (int) yInc);
+            }
+        } else {
+            if (yStart <= yEnd) {
+            }
+        }
+    }
 }
 
