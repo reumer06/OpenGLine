@@ -37,7 +37,6 @@ int main()
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> dist(1, 600);
 
-
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
         std::println("Failed to initialize GLFW");
@@ -115,10 +114,10 @@ int main()
     vertices.clear();
     for (int i = 0; i < lineNum; ++i) {
         // generate random start and end points.
-        int xStart = 1 + rand() % SCR_WIDTH;
-        int yStart = 1 + rand() % SCR_HEIGHT;
-        int xEnd = 1 + rand() % SCR_WIDTH;
-        int yEnd = 1 + rand() % SCR_HEIGHT;
+        int xStart = dist(gen);
+        int yStart = dist(gen);
+        int xEnd = dist(gen);
+        int yEnd = dist(gen);
 
         std::println("Line {}: (x0, y0) = ({}, {}); \n(x1, y1) = ({}, {})", i + 1, xStart, yStart, xEnd, yEnd);
         // if (flag) {
