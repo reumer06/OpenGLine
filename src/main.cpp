@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 
 
 const unsigned int SCR_WIDTH{800};
@@ -21,6 +22,15 @@ int main()
 {
     int lineNum, dashLength, flag;
     std::vector<float> vertices;
+
+    std::print("Enter the number of lines: ");
+    std::cin >> lineNum;
+
+    std::print("Enter the dash length: ");
+    std::cin >> dashLength;
+
+    std::print("Choose your algorithm: (0 for Basic, 1 for Bresenham): ");
+    std::cin >> flag
 
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
