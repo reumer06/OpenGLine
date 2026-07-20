@@ -5,6 +5,7 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include <random>
 
 
 const unsigned int SCR_WIDTH{800};
@@ -30,7 +31,12 @@ int main()
     std::cin >> dashLength;
 
     std::print("Choose your algorithm: (0 for Basic, 1 for Bresenham): ");
-    std::cin >> flag
+    std::cin >> flag;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(1, 600);
+
 
     glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) {
