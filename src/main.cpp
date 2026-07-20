@@ -177,5 +177,9 @@ std::string readFile(const char *path)
 
 void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
 {
+    int dx = abs(xEnd - xStart);
+    int dy = abs(yEnd - yStart);
+    int x, y;
+    float m, xInc, yInc;
 }
 
