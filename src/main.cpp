@@ -53,7 +53,6 @@ int main()
     GLint success;
     char infoLog[512];
 
-    // Vertex Shader
     GLuint vertexShader{glCreateShader(GL_VERTEX_SHADER)};
     std::string vertexShaderSourceStr{readFile("shaders/vertexshader.vert")};
     const char *vertexShaderSource{vertexShaderSourceStr.c_str()};
@@ -98,6 +97,18 @@ int main()
     glEnableVertexAttribArray(0);
 
     vertices.clear();
+    for (int i = 0; i < lineNum; ++i) {
+        // generate random start and end points.
+        int xStart = 1 + rand() % SCR_WIDTH;
+        int yStart = 1 + rand() % SCR_HEIGHT;
+        int xEnd = 1 + rand() % SCR_WIDTH;
+        int yEnd = 1 + rand() % SCR_HEIGHT;
+
+        std::println("Line {}: (x0, y0) = ({}, {}); \n(x1, y1) = ({}, {})", i + 1, xStart, yStart, xEnd, yEnd);
+        // if (flag) {
+        // } else {
+        // };
+    }
 
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
