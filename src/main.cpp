@@ -185,6 +185,7 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
     if (dashLength == 0) {
         // Solid Line
         if (dx >= dy) {
+            // shallow line
             if (xStart <= xEnd) {
                 // if line is moving from the left to right
                 x = xStart;
@@ -208,9 +209,26 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
                 vertices.push_back((float) (int) yInc);
             }
         } else {
+            // steep line
             if (yStart <= yEnd) {
+                x = xStart;
+                y = yStart;
+            } else {
+                x = xEnd;
+                y = yEnd;
+                xEnd = xStart;
+                yEnd = yStart;
+            }
+            m = (float) dx / (float) dy;
+            for (int i = 0; i <= dy; i++) {
+                yInc = y + i;
+                xInc = (x > xEnd) ? (-m * i + x) : (m * i + x);
+                vertices.push_back((float) ((int) xInc));
+                vertices.push_back(yInc);
             }
         }
+    } else {
+        // dashed line
     }
 }
 
