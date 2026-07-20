@@ -19,6 +19,8 @@ void glfwErrorCallback(int error, const char *description);
 
 std::string readFile(const char *path);
 
+void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices);
+
 int main()
 {
     int lineNum, dashLength, flag;
@@ -172,3 +174,8 @@ std::string readFile(const char *path)
     std::string content{buffer.str()};
     return content;
 }
+
+void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
+{
+}
+
