@@ -229,6 +229,32 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
         }
     } else {
         // dashed line
+        int dashed = 0, dot = 0;
+        if (dx >= dy) {
+            if (xStart <= xEnd) {
+                x = xStart;
+                y = yStart;
+            } else {
+                x = xEnd;
+                y = yEnd;
+                yEnd = xStart;
+                xEnd = yStart;
+            }
+            m = (float) dy / (float) dx;
+            for (int i = 0; i <= dx; ++i) {
+                xInc = x + i;
+                yInc = (y > yEnd) ? (-m * i + y) : (m * i + y);
+                if (!dashed) {
+                    vertices.push_back(xInc);
+                    vertices.push_back((float) (int) yInc);
+                }
+                dot++;
+                if (dot % dashLength == 0) {
+                    dashed != dashed;
+                }
+            }
+        } else {
+        }
     }
 }
 
