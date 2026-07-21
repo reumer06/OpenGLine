@@ -21,6 +21,8 @@ std::string readFile(const char *path);
 
 void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices);
 
+void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices);
+
 int main()
 {
     int lineNum, dashLength, flag;
@@ -238,4 +240,8 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
             }
         }
     }
+}
+
+void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
+{
 }
