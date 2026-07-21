@@ -177,106 +177,65 @@ std::string readFile(const char *path)
 
 void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
 {
-    int dx = abs(xEnd - xStart);
-    int dy = abs(yEnd - yStart);
-    int x, y;
-    float m, xInc, yInc;
+    // single pixel
+    if (xStart == xEnd && yStart == yEnd) {
+        vertices.push_back((float) xStart);
+        vertices.push_back((float) yStart);
+        return;
+    }
 
-    if (dashLength == 0) {
-        // Solid Line
-        if (dx >= dy) {
-            // shallow line
-            if (xStart <= xEnd) {
-                // if line is moving from the left to right
-                x = xStart;
-                y = yStart;
-            } else {
-                // swap the points of right to left
-                x = xEnd;
-                y = yEnd;
-                xEnd = xStart;
-                yEnd = yStart;
-            }
-            m = (float) dy / (float) dx;
-            for (int i = 0; i <= dx; ++i) {
-                xInc = x + i;
-                yInc = (y > yEnd)
-                           ? (
-                               -m * i + y
-                           )
-                           : (m * i + y);
-                vertices.push_back(xInc);
-                vertices.push_back((float) (int) yInc);
-            }
-        } else {
-            // steep line
-            if (yStart <= yEnd) {
-                x = xStart;
-                y = yStart;
-            } else {
-                x = xEnd;
-                y = yEnd;
-                xEnd = xStart;
-                yEnd = yStart;
-            }
-            m = (float) dx / (float) dy;
-            for (int i = 0; i <= dy; i++) {
-                yInc = y + i;
-                xInc = (x > xEnd) ? (-m * i + x) : (m * i + x);
-                vertices.push_back((float) ((int) xInc));
-                vertices.push_back(yInc);
-            }
+    int dx = std::abs(xEnd - xStart);
+    int dy = std::abs(yEnd - yStart);
+    bool isShallow = (dx >= dy);
+
+    int x = xStart;
+    int y = yStart;
+
+    // normalize endpoint directions
+    if (isShallow) {
+        if (xStart > xEnd) {
+            x = xEnd;
+            y = yEnd;
+            xEnd = xStart;
+            yEnd = yStart;
         }
     } else {
-        // dashed line
-        int dashed = 0, dot = 0;
-        if (dx >= dy) {
-            if (xStart <= xEnd) {
-                x = xStart;
-                y = yStart;
-            } else {
-                x = xEnd;
-                y = yEnd;
-                yEnd = yStart;
-                xEnd = xStart;
-            }
-            m = (float) dy / (float) dx;
-            for (int i = 0; i <= dx; ++i) {
-                xInc = x + i;
-                yInc = (y > yEnd) ? (-m * i + y) : (m * i + y);
-                if (!dashed) {
-                    vertices.push_back(xInc);
-                    vertices.push_back((float) (int) yInc);
-                }
-                dot++;
-                if (dot % dashLength == 0) {
-                    dashed != dashed;
-                }
-            }
+        if (yStart > yEnd) {
+            x = xEnd;
+            y = yEnd;
+            xEnd = xStart;
+            yEnd = yStart;
+        }
+    }
+
+    int steps = isShallow ? dx : dy;
+    float m = isShallow ? ((float) dy / dx) : ((float) dx / dy);
+
+    int dashed = 0;
+    int dot = 0;
+
+    for (int i = 0; i <= steps; ++i) {
+        float xInc, yInc;
+
+        if (isShallow) {
+            xInc = x + i;
+            yInc = (y > yEnd) ? (-m * i + y) : (m * i + y);
         } else {
-            if (yStart <= yEnd) {
-                x = xStart;
-                y = yStart;
-            } else {
-                x = xEnd;
-                y = yEnd;
-                xEnd = xStart;
-                yEnd = yStart;
-            }
-            m = (float) dx / (float) dy;
-            for (int i = 0; i <= dy; ++i) {
-                yInc = y + i;
-                xInc = (x > xEnd) ? (-m * i + x) : (m * i + x);
-                if (!dashed) {
-                    vertices.push_back(yInc);
-                    vertices.push_back((float) (int) xInc);
-                }
-                dot++;
-                if (dot % dashLength == 0) {
-                    dashed != dashed;
-                }
+            yInc = y + i;
+            xInc = (x > xEnd) ? (-m * i + x) : (m * i + x);
+        }
+
+        if (dashLength == 0 || !dashed) {
+            vertices.push_back(std::round(xInc));
+            vertices.push_back(std::round(yInc));
+        }
+
+        // dash state
+        if (dashLength > 0) {
+            dot++;
+            if (dot % dashLength == 0) {
+                dashed = !dashed;
             }
         }
     }
 }
-
