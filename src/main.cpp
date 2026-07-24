@@ -245,4 +245,10 @@ void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, st
 {
     int dx = std::abs(xEnd - xStart);
     int dy = std::abs(yEnd - yStart);
+    int sx = (xStart < xEnd) ? 1 : -1;
+    int sy = (yStart < yEnd) ? 1 : -1;
+    int err = dx - dy;
+
+    int dashed = 0;
+    int dot = 0;
 }
