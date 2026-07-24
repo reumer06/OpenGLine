@@ -162,7 +162,6 @@ void glfwErrorCallback(int error, const char *description)
     std::println("GLFW Error: {} \n Description: {}", error, description);
 }
 
-
 std::string readFile(const char *path)
 {
     std::ifstream file(path);
@@ -244,4 +243,6 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
 
 void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
 {
+    int dx = std::abs(xEnd - xStart);
+    int dy = std::abs(yEnd - yStart);
 }
