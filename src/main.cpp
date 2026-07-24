@@ -241,7 +241,7 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
     }
 }
 
-void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
+void bresenhamAlg(int dashlength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
 {
     int dx = std::abs(xEnd - xStart);
     int dy = std::abs(yEnd - yStart);
@@ -251,4 +251,19 @@ void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, st
 
     int dashed = 0;
     int dot = 0;
+
+    while (true) {
+        if (dashlength == 0 || !dashed) {
+            vertices.push_back((float) xStart);
+            vertices.push_back((float) yStart);
+        }
+
+        // toggle dash state
+        if (dashlength > 0) {
+            dot++;
+            if (dot % dashlength == 0) {
+                dashed = !dashed;
+            }
+        }
+    }
 }
