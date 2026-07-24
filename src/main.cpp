@@ -267,5 +267,15 @@ void bresenhamAlg(int dashlength, int xStart, int yStart, int xEnd, int yEnd, st
         }
 
         if (xStart == xEnd && yStart == yEnd) break;
+
+        int errorTwo = 2 * err;
+        if (errorTwo >= -dy) {
+            err -= dy;
+            xStart += sx;
+        }
+        if (errorTwo <= dx) {
+            err += dx;
+            yStart += sy;
+        }
     }
 }
