@@ -265,5 +265,7 @@ void bresenhamAlg(int dashlength, int xStart, int yStart, int xEnd, int yEnd, st
                 dashed = !dashed;
             }
         }
+
+        if (xStart == xEnd && yStart == yEnd) break;
     }
 }
