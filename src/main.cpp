@@ -170,6 +170,8 @@ int main()
 
         process_input(window);
 
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_POINTS, 0, vertices.size() / 2);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
