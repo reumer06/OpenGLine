@@ -131,6 +131,10 @@ int main()
         };
     }
 
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(),GL_DYNAMIC_DRAW);
+    std::println("Rendering complete. close window to exit.");
+
     while (!glfwWindowShouldClose(window)) {
         process_input(window);
 
