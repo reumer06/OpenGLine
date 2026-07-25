@@ -124,9 +124,11 @@ int main()
         int yEnd = dist(gen);
 
         std::println("Line {}: (x0, y0) = ({}, {}); \n(x1, y1) = ({}, {})", i + 1, xStart, yStart, xEnd, yEnd);
-        // if (flag) {
-        // } else {
-        // };
+        if (flag) {
+            bresenhamAlg(dashLength, xStart, xEnd, yStart, yEnd, vertices);
+        } else {
+            basicAlg(dashLength, xStart, xEnd, yStart, yEnd, vertices);
+        };
     }
 
     while (!glfwWindowShouldClose(window)) {
