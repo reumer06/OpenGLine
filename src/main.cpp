@@ -165,6 +165,9 @@ int main()
         GLint projLoc{glGetUniformLocation(shaderProgram, "projection")};
         glUniformMatrix4fv(projLoc, 1,GL_FALSE, ortho);
 
+        GLint colorLoc{glGetUniformLocation(shaderProgram, "color")};
+        glUniform3f(colorLoc, 1.0f, 1.0f, 1.0f);
+
         process_input(window);
 
 
