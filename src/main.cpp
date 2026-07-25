@@ -21,6 +21,8 @@ std::string readFile(const char *path);
 
 void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices);
 
+void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices);
+
 int main()
 {
     int lineNum, dashLength, flag;
@@ -122,9 +124,11 @@ int main()
         int yEnd = dist(gen);
 
         std::println("Line {}: (x0, y0) = ({}, {}); \n(x1, y1) = ({}, {})", i + 1, xStart, yStart, xEnd, yEnd);
-        // if (flag) {
-        // } else {
-        // };
+        if (flag) {
+            bresenhamAlg(dashLength, xStart, xEnd, yStart, yEnd, vertices);
+        } else {
+            basicAlg(dashLength, xStart, xEnd, yStart, yEnd, vertices);
+        };
     }
 
     while (!glfwWindowShouldClose(window)) {
@@ -159,7 +163,6 @@ void glfwErrorCallback(int error, const char *description)
 {
     std::println("GLFW Error: {} \n Description: {}", error, description);
 }
-
 
 std::string readFile(const char *path)
 {
@@ -236,6 +239,45 @@ void basicAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::v
             if (dot % dashLength == 0) {
                 dashed = !dashed;
             }
+        }
+    }
+}
+
+void bresenhamAlg(int dashLength, int xStart, int yStart, int xEnd, int yEnd, std::vector<float> &vertices)
+{
+    int dx = std::abs(xEnd - xStart);
+    int dy = std::abs(yEnd - yStart);
+    int sx = (xStart < xEnd) ? 1 : -1;
+    int sy = (yStart < yEnd) ? 1 : -1;
+    int err = dx - dy;
+
+    int dashed = 0;
+    int dot = 0;
+
+    while (true) {
+        if (dashLength == 0 || !dashed) {
+            vertices.push_back((float) xStart);
+            vertices.push_back((float) yStart);
+        }
+
+        // toggle dash state
+        if (dashLength > 0) {
+            dot++;
+            if (dot % dashLength == 0) {
+                dashed = !dashed;
+            }
+        }
+
+        if (xStart == xEnd && yStart == yEnd) break;
+
+        int errorTwo = 2 * err;
+        if (errorTwo >= -dy) {
+            err -= dy;
+            xStart += sx;
+        }
+        if (errorTwo <= dx) {
+            err += dx;
+            yStart += sy;
         }
     }
 }
