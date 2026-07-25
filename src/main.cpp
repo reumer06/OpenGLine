@@ -136,9 +136,11 @@ int main()
     std::println("Rendering complete. close window to exit.");
 
     while (!glfwWindowShouldClose(window)) {
+        glClear(GL_COLOR_BUFFER_BIT);
+        glUseProgram(shaderProgram);
+
         process_input(window);
 
-        glClear(GL_COLOR_BUFFER_BIT);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
