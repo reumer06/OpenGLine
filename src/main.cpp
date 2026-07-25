@@ -139,6 +139,32 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(shaderProgram);
 
+        float left = 0.0f, right = (float) SCR_WIDTH;
+        float bottom = 0.0f, top = (float) SCR_HEIGHT;
+        float nearVal = -1.0f, farVal = 1.0f;
+
+        float ortho[16] = {
+            2.0f / (right - left),
+            0.0f,
+            0.0f,
+            0.0f,
+            0.0f,
+            2.0f / (top - bottom),
+            0.0f,
+            0.0f,
+            0.0f,
+            0.0f,
+            -2.0f / (farVal - nearVal),
+            0.0f,
+            -(right + left) / (right - left),
+            -(top + bottom) / (top - bottom),
+            -(farVal + nearVal) / (farVal - nearVal),
+            1.0f
+        };
+
+        GLint projLoc{glGetUniformLocation(shaderProgram, "projection")};
+        glUniformMatrix4fv(projLoc, 1,GL_FALSE, ortho);
+
         process_input(window);
 
 
